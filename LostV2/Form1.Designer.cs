@@ -39,6 +39,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.roomLabel = new System.Windows.Forms.Label();
+            this.invLabel = new System.Windows.Forms.Label();
+            this.invHeader = new System.Windows.Forms.Label();
+            this.actionOutputLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.blueImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.redImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -52,7 +55,7 @@
             this.outputLabel.Location = new System.Drawing.Point(24, 50);
             this.outputLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.outputLabel.Name = "outputLabel";
-            this.outputLabel.Size = new System.Drawing.Size(339, 235);
+            this.outputLabel.Size = new System.Drawing.Size(682, 147);
             this.outputLabel.TabIndex = 2;
             this.outputLabel.Text = "label1";
             // 
@@ -146,7 +149,7 @@
             // 
             // roomLabel
             // 
-            this.roomLabel.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roomLabel.Font = new System.Drawing.Font("Courier New", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roomLabel.ForeColor = System.Drawing.Color.White;
             this.roomLabel.Location = new System.Drawing.Point(11, 9);
             this.roomLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -155,12 +158,48 @@
             this.roomLabel.TabIndex = 9;
             this.roomLabel.Text = "label1";
             // 
+            // invLabel
+            // 
+            this.invLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.invLabel.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invLabel.ForeColor = System.Drawing.Color.White;
+            this.invLabel.Location = new System.Drawing.Point(452, 326);
+            this.invLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.invLabel.Name = "invLabel";
+            this.invLabel.Size = new System.Drawing.Size(254, 117);
+            this.invLabel.TabIndex = 10;
+            // 
+            // invHeader
+            // 
+            this.invHeader.Font = new System.Drawing.Font("Courier New", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invHeader.ForeColor = System.Drawing.Color.White;
+            this.invHeader.Location = new System.Drawing.Point(449, 303);
+            this.invHeader.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.invHeader.Name = "invHeader";
+            this.invHeader.Size = new System.Drawing.Size(257, 23);
+            this.invHeader.TabIndex = 11;
+            this.invHeader.Text = "Inventory";
+            // 
+            // actionOutputLabel
+            // 
+            this.actionOutputLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.actionOutputLabel.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.actionOutputLabel.ForeColor = System.Drawing.Color.White;
+            this.actionOutputLabel.Location = new System.Drawing.Point(24, 209);
+            this.actionOutputLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.actionOutputLabel.Name = "actionOutputLabel";
+            this.actionOutputLabel.Size = new System.Drawing.Size(682, 83);
+            this.actionOutputLabel.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(734, 462);
+            this.Controls.Add(this.actionOutputLabel);
+            this.Controls.Add(this.invHeader);
+            this.Controls.Add(this.invLabel);
             this.Controls.Add(this.roomLabel);
             this.Controls.Add(this.greenLabel);
             this.Controls.Add(this.yellowLabel);
@@ -197,6 +236,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label roomLabel;
+        private System.Windows.Forms.Label invLabel;
+        private System.Windows.Forms.Label invHeader;
+        private System.Windows.Forms.Label actionOutputLabel;
     }
 }
 
