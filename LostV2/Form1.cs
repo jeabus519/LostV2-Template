@@ -16,17 +16,45 @@ namespace LostV2
 {
     public partial class Form1 : Form
     {
+        Random rnd = new Random();  //creates a random number generator
+
         int scene = 0;  // tracks what part of the game the user is at
+        bool invisPot = false;
+        bool cloak = false;
+        bool amulet = false;
+        bool lockpicks = false;
+        bool skeletons = true;
+        bool armorySecretSeen = false;
+        int scene3Trap;
+        int trapSurvive;
+        int prisonDoor;
+        int armoryDoor;
+        int armorySecretChance;
+
 
         public Form1()
         {
             InitializeComponent();
 
+            scene3Trap = rnd.Next(1, 2); //THIS IS JUST SO THAT I CAN TEST EASILY NEED TO CHANGE TO (1, 11) I REALLY HOPE I REMEMBER TO CHANGE IT
+            trapSurvive = rnd.Next(1, 4);
+            prisonDoor = rnd.Next(1, 5);
+            armoryDoor = rnd.Next(1, 5);
+            armorySecretChance = rnd.Next(1, 3);
+
             //display initial message and options
+            outputLabel.Text = "You are an adventurer passing through the town of Phandalin. While at the general store, the owner mentioned some trouble the town had been having with a local gang called the Redbrands, who are led by a wizard named Glasstaff. He asks if you could help out. You agree, and have managed to track them to Tresandar Manor. After investigating the ruins, you find a cellar.";
+            roomLabel.Text = "Tresandar Ruins";
+            blueLabel.Text = "Enter the cellar";
+            redLabel.Text = "Don't enter the cellar";
+            yellowLabel.Text = "";
+            greenLabel.Text = "";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            actionOutputLabel.Text = "";
+
             /// check to see what button has been pressed and advance
             /// to the next appropriate scene
             if (e.KeyCode == Keys.M)           //red button press
@@ -34,21 +62,67 @@ namespace LostV2
                 switch (scene)
                 {
                     case 0:
-                        outputLabel.Text = "Don't be a bitch";
+                        actionOutputLabel.Text = "Don't be a bitch";
                         break;
                     case 1:
+                        actionOutputLabel.Text = "You find nothing useful in the barrels. You made so much noise that the thugs in the next room heard you. They sneak up behind you and smash a barrel over your head, killing you instantly.";
+                        scene = 20;
                         break;
                     case 2:
+                        actionOutputLabel.Text = "You find nothing useful";
                         break;
                     case 3:
+                        if (scene3Trap == 1)
+                        {
+                            actionOutputLabel.Text = "You enter the doors, avoiding the pitfall";
+                            scene = 4;
+                        }
                         break;
                     case 4:
+                        if(skeletons)
+                        {
+                            actionOutputLabel.Text = "As you approach the door, you hear some creaking behind you. You turn around to see that the skeletons have stood up. They cut you to ribbons";
+                            scene = 20;
+                        }
+                        else
+                        {
+                            actionOutputLabel.Text = "You enter the eastern door";
+                            scene = 5;
+                        }
                         break;
                     case 5:
+                        if (prisonDoor == 1)
+                        {
+                            actionOutputLabel.Text = "You throw all your weight into the door, but you cant get it open";
+                        }
+                        else
+                        {
+                            actionOutputLabel.Text = "You manage to get the doors open. You tell the prisoners how to escape, and warn them about the trap in the hallway";
+                        }
                         break;
                     case 6:
+                        if (armoryDoor == 1)
+                        {
+                            actionOutputLabel.Text = "You throw all of you weight into the door, and manage to break through into the next room";
+                            scene = 7;
+                        }
+                        else if (armorySecretChance == 1)
+                        {
+                            actionOutputLabel.Text = "You throw all of your weight into the door, but are unable to break though. However, while you were struggling to get it open, you found a secret door right beside it";
+                            armorySecretSeen = true;
+                        }
+                        else
+                        {
+                            actionOutputLabel.Text = "You throw all of your weight into the door, but are unable to break though";
+                        }
                         break;
                     case 7:
+                        if (!cloak)
+                        {
+                            actionOutputLabel.Text = "You put on a cloak";
+                            cloak = true;
+                            UpdateInv();
+                        }
                         break;
                     case 8:
                         break;
@@ -72,21 +146,57 @@ namespace LostV2
                 switch (scene)
                 {
                     case 0:
+                        actionOutputLabel.Text = "You enter the cellar";
                         scene = 1;
                         break;
                     case 1:
+                        actionOutputLabel.Text = "You enter the western door";
+                        scene = 2;
                         break;
                     case 2:
+                        if(!lockpicks)
+                        {
+                            actionOutputLabel.Text = "You take the lockpicks";
+                            lockpicks = true;
+                            UpdateInv();
+                        }
                         break;
                     case 3:
+                        if (trapSurvive == 1)
+                        {
+                            actionOutputLabel.Text = "As you walk down the hall, the floor falls away beneath you. Luckily, you manage to grab the edge to avoid falling in. You continue through the doors";
+                            scene = 4;
+                        }
+                        else
+                        {
+                            actionOutputLabel.Text = "As you walk down the hall, the floor falls away beneath you. You attempt to grab the ledge, but you miss. You fall into the pit, and are impaled on a large spike";
+                            scene = 20;
+                        }
                         break;
                     case 4:
+                        actionOutputLabel.Text = "You notice that while the skeletons appear to have been there for years, their swords are razor sharp, and unrusted. You also notice a strange rune and the back of each skeleton's head. You recognize the rune as an arcane symbol used to reanimate the dead. You crush all three skulls, just to be safe";
+                        skeletons = false;
                         break;
                     case 5:
+                        if (lockpicks)
+                        {
+                            actionOutputLabel.Text = "You pick the lock and get the door open. You tell the prisoners how to escape, and warn them about the trap in the hallway";
+                        }
                         break;
                     case 6:
+                        if (lockpicks)
+                        {
+                            actionOutputLabel.Text = "You pick the lock and get the door open. You go inside";
+                            scene = 7;
+                        }
                         break;
                     case 7:
+                        if (!amulet)
+                        {
+                            actionOutputLabel.Text = "You put on the amulet";
+                            amulet = true;
+                            UpdateInv();
+                        }
                         break;
                     case 8:
                         break;
@@ -111,16 +221,31 @@ namespace LostV2
                     case 0:
                         break;
                     case 1:
+                        actionOutputLabel.Text = "You enter the northern door";
+                        scene = 3;
                         break;
                     case 2:
+                        if(!cloak)
+                        {
+                            actionOutputLabel.Text = "You put on a cloak";
+                            cloak = true;
+                            UpdateInv();
+                        }
                         break;
                     case 3:
                         break;
                     case 4:
+                        actionOutputLabel.Text = "You enter the northern door";
+                        scene = 6;
                         break;
                     case 5:
                         break;
                     case 6:
+                        if (armorySecretSeen)
+                        {
+                            actionOutputLabel.Text = "You enter the secret door";
+                            scene = 8;
+                        }
                         break;
                     case 7:
                         break;
@@ -147,18 +272,36 @@ namespace LostV2
                     case 0:
                         break;
                     case 1:
+                        if (!invisPot)
+                        {
+                            actionOutputLabel.Text = "You find a waterproof satchel hidden inside. Within, you find a small vial labeled \"Potion of Invisibility\". You take it.";
+                            invisPot = true;
+                            UpdateInv();
+                        }
                         break;
                     case 2:
+                        actionOutputLabel.Text = "You return to the cellar";
+                        scene = 1;
                         break;
                     case 3:
+                        actionOutputLabel.Text = "You return to the cellar";
+                        scene = 1;
                         break;
                     case 4:
+                        actionOutputLabel.Text = "You return to the trapped hallway";
+                        scene = 3;
                         break;
                     case 5:
+                        actionOutputLabel.Text = "You return to the crypts";
+                        scene = 4;
                         break;
                     case 6:
+                        actionOutputLabel.Text = "You return to the crypts";
+                        scene = 4;
                         break;
                     case 7:
+                        actionOutputLabel.Text = "You return to the armory hallway";
+                        scene = 6;
                         break;
                     case 8:
                         break;
@@ -189,30 +332,61 @@ namespace LostV2
                     greenLabel.Text = "";
                     break;
                 case 1:
+                    if (!invisPot)
+                    {
+                        greenLabel.Text = "Search the cistern";
+                    }
                     outputLabel.Text = "The door opens onto a five-foot-wide landing fifteen feet above a large cellar, with stone steps descending to the floor in two short flights. There is a door on the western wall, while another door stands beneath the stairs to the north. A large stone cistern occupies the western part of the room, whose walls are lined with kegs and barrels.";
                     roomLabel.Text = "Cellar";
                     blueLabel.Text = "Go west";
                     redLabel.Text = "Search the barrels";
                     yellowLabel.Text = "Go north";
-                    greenLabel.Text = "Search the cistern";
+
                     break;
                 case 2:
+                    if (!lockpicks)
+                    {
+                        blueLabel.Text = "Take the lockpicks";
+                    }
+                    else
+                    {
+                        blueLabel.Text = "";
+                    }
+                    if(!cloak)
+                    {
+                        yellowLabel.Text = "Put on a cloak";
+                    }
+                    else
+                    {
+                        yellowLabel.Text = "";
+                    }
                     outputLabel.Text = "This appears to be a storeroom pressed into service as living quarters. Two double bunks stand against the wall near the door, while barrels and crates fill the southern half of the chamber. There are 3 dirty scarlet cloaks hanging up on the bunks, and a set of lockpicks on top of a nearby crate.";
                     roomLabel.Text = "Barracks";
-                    blueLabel.Text = "Take the lockpicks";
                     redLabel.Text = "Search the barrels";
-                    yellowLabel.Text = "Put on a cloak";
                     greenLabel.Text = "Return the the cellar";
                     break;
                 case 3:
-                    outputLabel.Text = "Thick dust covers the flagstones of this somber hallway. The walls are decorated with faux columns every ten feet, and the double doors at the west end of the hall are sheathed in copper plate, now green with age. A relief carving of a mournful angel graces the doors.";
-                    roomLabel.Text = "Crypt Hallway";
-                    blueLabel.Text = "Enter the double doors";
-                    redLabel.Text = "";
-                    yellowLabel.Text = "";
-                    greenLabel.Text = "Return to the cellar";
+                    if (scene3Trap == 1)
+                    {
+                        outputLabel.Text = "Thick dust covers the flagstones of this somber hallway. The walls are decorated with faux columns every ten feet, and the double doors at the west end of the hall are sheathed in copper plate, now green with age. A relief carving of a mournful angel graces the doors. You notice that a section of the floor about halfway down is a slightly different color. You figure this is a trap, so you think its best to avoid it.";
+                        roomLabel.Text = "Crypt Hallway";
+                        blueLabel.Text = "Enter the double doors";
+                        redLabel.Text = "Avoid the trap";
+                        yellowLabel.Text = "";
+                        greenLabel.Text = "Return to the cellar";
+                    }
+                    else
+                    {
+                        outputLabel.Text = "Thick dust covers the flagstones of this somber hallway. The walls are decorated with faux columns every ten feet, and the double doors at the west end of the hall are sheathed in copper plate, now green with age. A relief carving of a mournful angel graces the doors.";
+                        roomLabel.Text = "Crypt Hallway";
+                        blueLabel.Text = "Enter the double doors";
+                        redLabel.Text = "";
+                        yellowLabel.Text = "";
+                        greenLabel.Text = "Return to the cellar";
+                    }
                     break;
                 case 4:
+                    trapSurvive = 1;
                     outputLabel.Text = "Three large stone sarcophagi stand within this dusty crypt, and propped up against each sarcophagus is a human skeleton clad in bits of rusty mail. False columns along the walls are carved in the image of spreading oak trees. There is a door on the northern wall, and a door on the eastern wall.";
                     roomLabel.Text = "Crypts";
                     blueLabel.Text = "Investigate the skeletons";
@@ -221,26 +395,61 @@ namespace LostV2
                     greenLabel.Text = "Return to the crypt hallway";
                     break;
                 case 5:
+                    if(lockpicks)
+                    {
+                        blueLabel.Text = "Pick the cell doors";
+                    }
+                    else
+                    {
+                        blueLabel.Text = "";
+                    }
                     outputLabel.Text = "This long room is partitioned into three areas, with iron bars walling off the north and south. Filthy straw lines the floors of those cells, the hinged doors of which are secured by chains and padlocks. A pair of disheveled human women are held in the cell to the south, while a human boy is confined to the north. All are dressed in plain gray tunics and have iron collars fitted around their necks. A heap of discarded clothing is piled carelessly against the far wall.";
                     roomLabel.Text = "Prison";
-                    blueLabel.Text = "Pick the cell doors";
                     redLabel.Text = "Try to force the cell doors";
                     yellowLabel.Text = "";
                     greenLabel.Text = "Return to the crypts";
                     break;
                 case 6:
+                    if(lockpicks)
+                    {
+                        blueLabel.Text = "Pick the lock";
+                    }
+                    else
+                    {
+                        blueLabel.Text = "";
+                    }
+                    if (armorySecretSeen)
+                    {
+                        yellowLabel.Text = "Enter the secret door";
+                    }
+                    else
+                    {
+                        yellowLabel.Text = "";
+                    }
                     outputLabel.Text = "The door leads to a 15 foot long hallway. At the end of it is a locked door.";
                     roomLabel.Text = "Armory Hallway";
-                    blueLabel.Text = "Pick the lock";
                     redLabel.Text = "Try to force the door";
-                    yellowLabel.Text = "Enter the secret door";
                     greenLabel.Text = "Return to the armory hallway";
                     break;
                 case 7:
-                    outputLabel.Text = "Racks of weapons line the walls of this chamber, including spears, swords, crossbows, and bolts. A dozen dirty red cloaks hang from hooks by the door.";
+                    if (!cloak)
+                    {
+                        redLabel.Text = "Put on a cloak";
+                    }
+                    else
+                    {
+                        redLabel.Text = "";
+                    }
+                    if (!amulet)
+                    {
+                        blueLabel.Text = "Put on the necklace";
+                    }
+                    else
+                    {
+                        blueLabel.Text = "";
+                    }
+                    outputLabel.Text = "Racks of weapons line the walls of this chamber, including spears, swords, crossbows, and bolts. A dozen dirty red cloaks hang from hooks by the door. On a pedestal at the end of the room is a necklace. A sign under it reads \"Necklace of Discerning\"";
                     roomLabel.Text = "Armory";
-                    blueLabel.Text = "Put on the necklace/read map/something";
-                    redLabel.Text = "Put on a cloak";
                     yellowLabel.Text = "";
                     greenLabel.Text = "Return to the armory hallway";
                     break;
@@ -293,8 +502,38 @@ namespace LostV2
                     greenLabel.Text = "";
                     break;
                 default:
+                    outputLabel.Text = "You died. Sucks to suck.";
+                    roomLabel.Text = "";
+                    blueLabel.Text = "";
+                    redLabel.Text = "";
+                    yellowLabel.Text = "";
+                    greenLabel.Text = "";
                     break;
             }
+        }
+
+        public void UpdateInv()
+        {
+            string outputString = "";
+
+            if (cloak) 
+            {
+                outputString += "Cloak\n";
+            }
+            if (lockpicks)
+            {
+                outputString += "Lockpicks\n";
+            }
+            if (invisPot)
+            {
+                outputString += "Potion of Invisibility\n";
+            }
+            if (amulet)
+            {
+                outputString += "Amulet of Discerning\n";
+            }
+
+            invLabel.Text =  outputString;
         }
 
     }
