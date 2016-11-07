@@ -1,4 +1,4 @@
-﻿/// created by : 
+﻿/// created by : Michael
 /// date       : 
 /// description: A basic text adventure game engine
 
