@@ -514,6 +514,10 @@ namespace LostV2
                         actionOutputLabel.Text = "You return to the crevasse";
                         scene = 9;
                         break;
+                    case 20:
+                        actionOutputLabel.Text = "";
+                        scene = 0;
+                        break;
                     default:
                         break;
                 }
@@ -870,12 +874,12 @@ namespace LostV2
                     greenLabel.Text = "";
                     break;
                 default:
-                    outputLabel.Text = "You died. Sucks to suck.";
+                    outputLabel.Text = "You died.";
                     roomLabel.Text = "";
                     blueLabel.Text = "";
                     redLabel.Text = "";
                     yellowLabel.Text = "";
-                    greenLabel.Text = "";
+                    greenLabel.Text = "Restart";
                     break;
             }
         }
