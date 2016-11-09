@@ -65,7 +65,7 @@
             this.blueLabel.ForeColor = System.Drawing.Color.White;
             this.blueLabel.Location = new System.Drawing.Point(89, 385);
             this.blueLabel.Name = "blueLabel";
-            this.blueLabel.Size = new System.Drawing.Size(343, 28);
+            this.blueLabel.Size = new System.Drawing.Size(504, 28);
             this.blueLabel.TabIndex = 3;
             this.blueLabel.Text = "label1";
             // 
@@ -75,7 +75,7 @@
             this.redLabel.ForeColor = System.Drawing.Color.White;
             this.redLabel.Location = new System.Drawing.Point(89, 430);
             this.redLabel.Name = "redLabel";
-            this.redLabel.Size = new System.Drawing.Size(343, 28);
+            this.redLabel.Size = new System.Drawing.Size(504, 28);
             this.redLabel.TabIndex = 4;
             this.redLabel.Text = "label1";
             // 
@@ -85,7 +85,7 @@
             this.greenLabel.ForeColor = System.Drawing.Color.White;
             this.greenLabel.Location = new System.Drawing.Point(89, 518);
             this.greenLabel.Name = "greenLabel";
-            this.greenLabel.Size = new System.Drawing.Size(343, 28);
+            this.greenLabel.Size = new System.Drawing.Size(504, 28);
             this.greenLabel.TabIndex = 8;
             this.greenLabel.Text = "label1";
             // 
@@ -95,7 +95,7 @@
             this.yellowLabel.ForeColor = System.Drawing.Color.White;
             this.yellowLabel.Location = new System.Drawing.Point(89, 474);
             this.yellowLabel.Name = "yellowLabel";
-            this.yellowLabel.Size = new System.Drawing.Size(343, 28);
+            this.yellowLabel.Size = new System.Drawing.Size(504, 28);
             this.yellowLabel.TabIndex = 7;
             this.yellowLabel.Text = "label1";
             // 
