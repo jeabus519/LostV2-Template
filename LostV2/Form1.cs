@@ -49,7 +49,7 @@ namespace LostV2
         {
             InitializeComponent();
 
-            scene3Trap = rnd.Next(1, 2); //THIS IS JUST SO THAT I CAN TEST EASILY NEED TO CHANGE TO (1, 11) I REALLY HOPE I REMEMBER TO CHANGE IT
+            scene3Trap = rnd.Next(1, 11);
             trapSurvive = rnd.Next(1, 4);
             prisonDoor = rnd.Next(1, 5);
             armoryDoor = rnd.Next(1, 5);
@@ -76,7 +76,8 @@ namespace LostV2
                 switch (scene)
                 {
                     case 0:
-                        actionOutputLabel.Text = "Don't be a bitch";
+                        actionOutputLabel.Text = "You decide not to enter. You live out the rest of your sad, sad life with the guilt of being a coward. You die alone, and your last thoughts were \"What if?\"";
+                        scene = 20;
                         break;
                     case 1:
                         if (barracksThugAlive)
