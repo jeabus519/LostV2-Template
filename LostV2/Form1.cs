@@ -515,8 +515,30 @@ namespace LostV2
                         actionOutputLabel.Text = "You return to the crevasse";
                         scene = 9;
                         break;
-                    case 20:
+                    case 20: //restarts the game, setting all values back to their defaults, and recalculates random numbers
                         actionOutputLabel.Text = "";
+                        invisPot = false;
+                        cloak = false;
+                        amulet = false;
+                        lockpicks = false;
+                        skeletons = true;
+                        armorySecretSeen = false;
+                        prisonersFreed = false;
+                        armoryDoorOpen = false;
+                        trapSurvived = false;
+                        storeroomSecretSeen = false;
+                        wizardFled = false;
+                        charInvis = false;
+                        commonroomThugsAlive = true;
+                        bugbearsEncountered = false;
+                        commonroomEncountered = false;
+                        barracksThugAlive = true;
+                        scene3Trap = rnd.Next(1, 11);
+                        trapSurvive = rnd.Next(1, 4);
+                        prisonDoor = rnd.Next(1, 5);
+                        armoryDoor = rnd.Next(1, 5);
+                        armorySecretChance = rnd.Next(1, 3);
+                        storeroomSecretChance = rnd.Next(1, 5);
                         scene = 0;
                         break;
                     default:
